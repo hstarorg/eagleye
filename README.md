@@ -1,2 +1,2 @@
-# eagleye
-The eagle eye front-end moniter system.
+# hawkeye
+The hawk eye front-end moniter system.
