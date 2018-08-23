@@ -17,16 +17,13 @@ class ReportHelper {
     }
   }
 
-  _makeRndString() {
-    return Math.random().toString(16);
-  }
-
   _doReportByImg(url, data) {
     const imgUrl = `${url}?${stringify(data)}`;
-    const rndKey = `hawkeye_report_${this._makeRndString()}`;
+    const rndKey = `hawkeye_report_${Math.floor(2147483648 * Math.random())}`;
     // Why set to global window object? When GC start, the request will be destroy.
     const img = (window[rndKey] = new Image());
-    img.onload = img.onerror = function() {
+    img.onload = img.onerror = img.onabort = function() {
+      img.onload = img.onerror = img.onabort = null;
       window[rndKey] = null; // Clean the variable.
     };
     img.src = imgUrl;
