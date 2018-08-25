@@ -12,12 +12,18 @@
 <body>
 
   <script>
-    (function (window, document, tagName, sdkAddress, globalName, scriptEl, firstEl) {
-      window['HawkeyeObject'] = globalName; window[globalName] = window[globalName] || function () {
+    (function (window, document, sdkAddress, globalName) {
+      var tagName = 'script';
+      window[globalName] = window[globalName] || function () {
         (window[globalName].q = window[globalName].q || []).push(arguments)
-      }, window[globalName].l = 1 * new Date(); scriptEl = document.createElement(tagName),
-        firstEl = document.getElementsByTagName(tagName)[0]; scriptEl.async = 1; scriptEl.src = sdkAddress; firstEl.parentNode.insertBefore(scriptEl, firstEl)
-    })(window, document, 'script', 'http://localhost:4123/hawkeye-sdk.js', 'hawkeye');
+      };
+      window[globalName].l = 1 * new Date();
+      var scriptEl = document.createElement(tagName);
+      var firstEl = document.getElementsByTagName(tagName)[0];
+      scriptEl.async = 1;
+      scriptEl.src = sdkAddress;
+      firstEl.parentNode.insertBefore(scriptEl, firstEl)
+    })(window, document, 'http://localhost:4123/hawkeye-sdk.js', 'hawkeye');
     hawkeye('config', {
       reportUrl: 'http://localhost:4124/collect',
       appId: '123456-1'

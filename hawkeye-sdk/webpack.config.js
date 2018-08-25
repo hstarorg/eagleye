@@ -1,5 +1,5 @@
 const path = require('path');
-const webpack = require('webpack');
+// const webpack = require('webpack');
 
 const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
@@ -8,7 +8,9 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'hawkeye-sdk.js'
+    filename: 'hawkeye-sdk.js',
+    library: 'hawkeye',
+    libraryTarget: 'umd'
   },
   resolve: {
     extensions: ['.json', '.js', '.jsx', '.css']
