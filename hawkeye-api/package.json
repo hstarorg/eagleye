@@ -1,0 +1,23 @@
+{
+  "name": "hawkeye-api",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "fast-koa dev",
+    "build": "fast-koa build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "fast-koa-cli": "0.0.2"
+  },
+  "dependencies": {
+    "fast-koa": "0.0.1",
+    "formidable": "^1.2.1",
+    "mongodb": "^3.1.3"
+  }
+}
