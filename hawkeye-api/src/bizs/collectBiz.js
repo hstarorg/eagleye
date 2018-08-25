@@ -14,7 +14,6 @@ function parseReqAsForm(req) {
 }
 
 async function saveNavigationTimingAsync(data) {
-  console.log(data);
   try {
     const navCol = await db.collection(db.Collections.NavigationTiming);
     navCol.insertOne(data);

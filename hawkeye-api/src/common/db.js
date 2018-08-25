@@ -39,6 +39,7 @@ class MongoDbHelper {
       }
       MongoClient.connect(
         this.options.mongoAddress,
+        { useNewUrlParser: true },
         (err, client) => {
           if (err) {
             return reject(err);
