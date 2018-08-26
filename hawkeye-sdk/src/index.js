@@ -1,15 +1,24 @@
-import { performance } from './lib/performance';
-import { reportHelper, util } from './utils';
+import { actionProcessor } from './actionProcessor';
 
-const hawkeyeOpt = {};
-
-const performanceData = Object.assign({}, util.getBasicBrowserData(), performance.getTimingPerformanceData());
-
-window['hawkeye'].q.forEach(x => {
-  if (x[0] === 'config') {
-    Object.assign(hawkeyeOpt, x[1]);
-  }
+window['HawkeyeObject'].forEach(action => {
+  action.type && actionProcessor.processAction(action);
 });
-reportHelper.doReport(hawkeyeOpt.reportUrl, performanceData);
+delete window['HawkeyeObject'];
 
-module.exports = function(action, payload) {};
+function hawkeye(type, payload) {
+  actionProcessor.processAction({ type, payload });
+}
+
+hawkeye.config = function(configObj) {
+  this('config', configObj);
+};
+
+hawkeye.trackPageView = function() {
+  this('send', { event: 'pageview' });
+};
+
+hawkeye.trackPerformance = function() {
+  this('send', { event: 'performance' });
+};
+
+export default hawkeye;

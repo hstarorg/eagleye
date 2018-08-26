@@ -1,7 +1,18 @@
-class Performance {
+import { util } from '../utils';
+
+class PerformanceReporter {
   constructor() {}
 
-  getTimingPerformanceData() {
+  getPerformanceTimingData() {
+    return Object.assign({}, this._getPerformanceTimingBasicData(), util.getBasicBrowserData(), {
+      tid: util.getTrackId()
+    });
+  }
+
+  /**
+   * Get performance timing basic data
+   */
+  _getPerformanceTimingBasicData() {
     const perfData = window.performance.timing;
     return {
       p_dl: perfData.domainLookupEnd - perfData.domainLookupStart, // DNS lookup time
@@ -16,7 +27,11 @@ class Performance {
     };
   }
 
-  getSlowResourceTimingData(slowTime = 2000) {
+  /**
+   * Get resource timing basic data
+   * @param {*} slowTime
+   */
+  _getSlowResourceTimingBasicData(slowTime = 2000) {
     const resources = window.performance
       .getEntries()
       .filter(x => x.entryType === 'resource' && x.initiatorType !== 'xmlhttprequest');
@@ -31,6 +46,6 @@ class Performance {
   }
 }
 
-const performance = new Performance();
+const performanceReporter = new PerformanceReporter();
 
-export { performance };
+export { performanceReporter };

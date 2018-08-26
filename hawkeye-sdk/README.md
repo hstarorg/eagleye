@@ -6,14 +6,21 @@ The client sdk for hawkeye.
 
 ```html
 <script>
-(function (window, document, tagName, sdkAddress, globalName, scriptEl, firstEl) {
-  window['HawkeyeObject'] = globalName; window[globalName] = window[globalName] || function () {
-    (window[globalName].q = window[globalName].q || []).push(arguments)
-  }, window[globalName].l = 1 * new Date(); scriptEl = document.createElement(tagName),
-    firstEl = document.getElementsByTagName(tagName)[0]; scriptEl.async = 1; scriptEl.src = sdkAddress; firstEl.parentNode.insertBefore(scriptEl, firstEl)
-})(window, document, 'script', 'https://xxx.com/hawkeye-sdk.js', 'hawkeye');
-hawkeye('create', 'appId', 'auto');
-hawkeye('send', 'pageview');
+tion (window, document, sdkAddress, libName) {
+  window[libName] = function (action, args) {
+    window.HawkeyeObject = window.HawkeyeObject || [];
+    window.HawkeyeObject.push({ action, payload: args });
+  };
+  var scriptEl = document.createElement('script');
+  var firstEl = document.getElementsByTagName('script')[0];
+  scriptEl.async = 1;
+  scriptEl.src = sdkAddress;
+  firstEl.parentNode.insertBefore(scriptEl, firstEl);
+})(window, document, 'http://localhost:4123/hawkeye-sdk.js', 'hawkeye');
+hawkeye('config', {
+  reportUrl: 'http://localhost:4124/collect',
+  appId: '123456-1'
+});
 </script>
 ```
 

@@ -30,7 +30,9 @@ class ReportHelper {
   }
 
   _doReportBySendBeacon(url, data) {
-    window.navigator.sendBeacon(url, new FormData(data));
+    const formData = new FormData();
+    Object.keys(data).forEach(k => formData.append(k, data[k]));
+    window.navigator.sendBeacon(url, formData);
   }
 }
 

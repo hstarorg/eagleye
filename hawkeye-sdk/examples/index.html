@@ -12,23 +12,21 @@
 <body>
 
   <script>
-    (function (window, document, sdkAddress, globalName) {
-      var tagName = 'script';
-      window[globalName] = window[globalName] || function () {
-        (window[globalName].q = window[globalName].q || []).push(arguments)
+    (function (window, document, sdkAddress, libName) {
+      window[libName] = function (action, args) {
+        window.HawkeyeObject = window.HawkeyeObject || [];
+        window.HawkeyeObject.push({ action, payload: args });
       };
-      window[globalName].l = 1 * new Date();
-      var scriptEl = document.createElement(tagName);
-      var firstEl = document.getElementsByTagName(tagName)[0];
+      var scriptEl = document.createElement('script');
+      var firstEl = document.getElementsByTagName('script')[0];
       scriptEl.async = 1;
       scriptEl.src = sdkAddress;
-      firstEl.parentNode.insertBefore(scriptEl, firstEl)
+      firstEl.parentNode.insertBefore(scriptEl, firstEl);
     })(window, document, 'http://localhost:4123/hawkeye-sdk.js', 'hawkeye');
     hawkeye('config', {
       reportUrl: 'http://localhost:4124/collect',
       appId: '123456-1'
     });
-    hawkeye('send', 'pageview');
   </script>
 </body>
 

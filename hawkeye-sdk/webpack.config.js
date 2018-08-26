@@ -10,7 +10,8 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'hawkeye-sdk.js',
     library: 'hawkeye',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    libraryExport: 'default'
   },
   resolve: {
     extensions: ['.json', '.js', '.jsx', '.css']
