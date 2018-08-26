@@ -1,12 +1,15 @@
+import { config } from '../config';
 import { util } from '../utils';
 
 class PerformanceReporter {
   constructor() {}
 
   getPerformanceTimingData() {
-    return Object.assign({}, this._getPerformanceTimingBasicData(), util.getBasicBrowserData(), {
-      tid: util.getTrackId()
+    const data = Object.assign({}, this._getPerformanceTimingBasicData(), util.getBasicBrowserData(), {
+      tid: util.getTrackId(),
+      aid: config.appId
     });
+    return data;
   }
 
   /**

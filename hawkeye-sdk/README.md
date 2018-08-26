@@ -7,9 +7,9 @@ The client sdk for hawkeye.
 ```html
 <script>
 tion (window, document, sdkAddress, libName) {
-  window[libName] = function (action, args) {
+  window[libName] = function (type, args) {
     window.HawkeyeObject = window.HawkeyeObject || [];
-    window.HawkeyeObject.push({ action, payload: args });
+    window.HawkeyeObject.push({ type, payload: args });
   };
   var scriptEl = document.createElement('script');
   var firstEl = document.getElementsByTagName('script')[0];

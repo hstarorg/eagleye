@@ -26,8 +26,25 @@ export const actionProcessor = {
       case 'pageview':
         break;
       case 'performance':
-        reportHelper.doReport(config.reportUrl, performanceReporter.getPerformanceTimingData());
+        this.__processPerformanceReport();
         break;
+    }
+  },
+
+  /**
+   * Process the performance data report.
+   */
+  __processPerformanceReport() {
+    const fn = function() {
+      setTimeout(() => {
+        reportHelper.doReport(config.reportUrl, performanceReporter.getPerformanceTimingData());
+        window.removeEventListener('load', fn);
+      });
+    };
+    if (document.readyState === 'complete') {
+      fn();
+    } else {
+      window.addEventListener('load', fn);
     }
   }
 };

@@ -9,6 +9,8 @@ function hawkeye(type, payload) {
   actionProcessor.processAction({ type, payload });
 }
 
+hawkeye.isReady = true;
+
 hawkeye.config = function(configObj) {
   this('config', configObj);
 };
