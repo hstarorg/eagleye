@@ -35,7 +35,7 @@ class MongoDbHelper {
     return new Promise((resolve, reject) => {
       // Find connected clinet, direct return.
       if (clientCache && clientCache.isConnected()) {
-        return clientCache;
+        return resolve(clientCache);
       }
       MongoClient.connect(
         this.options.mongoAddress,
